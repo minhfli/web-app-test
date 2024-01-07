@@ -1,19 +1,25 @@
-from flask import Flask,redirect,url_for
+from calendar import c
+import re
+from flask import Flask,redirect, render_template,url_for,request
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="./website/templates",static_folder="./website/static")
 
 @app.route("/")
 def home():
-    return "hello minh chim to<h1>Home</h1>"
+    return render_template("base.html")
 
-@app.route("/<name>")
-def user(name):
-    return f"Hello {name}"
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+        return redirect(url_for("user", username=request.form["name"]))
+    return render_template("login.html")
 
-@app.route("/admin")
-def admin():
-    return redirect(url_for("user", name="Admin"))
+
+@app.route("/user/<username>")
+def user(username):
+    return f"Hello {username}"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
