@@ -16,6 +16,10 @@ def wos_document():
             print("hello", file=sys.stderr)
     return render_template("wos_document.html")
 
+@app.route("/journal", methods=["POST", "GET"])
+def wos_journal():
+    
+    return render_template("base.html")
 
 
 #testing
