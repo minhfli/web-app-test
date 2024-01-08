@@ -1,0 +1,135 @@
+{%extends "./base.html"%}
+{%block title%}
+<div class="wrapper" style="margin: .5%;">
+    <title>Web of Science Searcher </title>
+    <p> Simple document seacher using WOS-Starter API</p>
+    <p></p>
+</div>
+{%endblock%}
+
+{%block body%}
+<style>
+    .search_table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .search_table tr td:nth-child(2) {
+        width: 60%;
+    }
+
+    input[type=text] {
+        width: 250px;
+    }
+
+    tr.spaceUnder>td {
+        padding-bottom: 7px;
+    }
+
+    .layout_table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .layout_table td:nth-child(1) {
+        width: 35%;
+    }
+
+    .layout_table td:nth-child(2) {
+        width: 68%;
+    }
+
+    div.scroll {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        float: left;
+    }
+</style>
+<div class="wrapper" style="margin: 0%;">
+    <table class="layout_table">
+        <td>
+            <form action="#" method="post">
+                <table class="search_table">
+                    <tr class="spaceUnder">
+                        <td align="right">UID</td>
+                        <td align="left"><input type="text" name="UID" placeholder="Unique identifier" /></td>
+                    </tr>
+                    <tr>
+                        <td align=" right">Title</td>
+                        <td align="left"><input type="text" name="TI" placeholder="Title of document" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">ISSN/ISBN</td>
+                        <td align="left"><input type="text" name="IS" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Source title</td>
+                        <td align="left"><input type="text" name="SO" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Volume</td>
+                        <td align="left"><input type="text" name="VL" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Page</td>
+                        <td align="left"><input type="text" name="PG" disabled=True /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Issue</td>
+                        <td align="left"><input type="text" name="CS" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Year Published</td>
+                        <td align="left"><input type="text" name="PY" placeholder="article's cover date" /></td>
+                    </tr>
+
+                    <tr>
+                        <td align="right">Author</td>
+                        <td align="left"><input type="text" name="AU" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Author Identifier</td>
+                        <td align="left"><input type="text" name="AI" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Accession Number</td>
+                        <td align="left"><input type="text" name="UT" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">DOI</td>
+                        <td align="left"><input type="text" name="DO" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Document Type</td>
+                        <td align="left"><input type="text" name="DT" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">PubMed ID</td>
+                        <td align="left"><input type="text" name="PMID" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Organization</td>
+                        <td align="left"><input type="text" name="OG" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Keywords</td>
+                        <td align="left"><input type="text" name="LA" placeholder="topic terms within the document" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Search records in DRCI</td>
+                        <td align="left"><input type="text" name="SUR" disabled=True /></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Search">
+            </form>
+        </td>
+        <td align="left"> ok
+            <div class="scroll">
+                {{results}}
+            </div>
+        </td>
+    </table>
+</div>
+{%endblock%}
