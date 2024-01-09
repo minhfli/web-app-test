@@ -25,11 +25,12 @@ def wos_document():
             save_document_request(request)
         elif request.form['action'] == "Clear":
             save_document_request(request)
+            return render_template("wos_document.html",clear_form=True,results=json.dumps(session["d_form"]))
         
             
     if "json" in session:
-        return render_template("wos_document.html",results=json.dumps(session["d_form"]))
-    return render_template("wos_document.html",results="No document request")
+        return render_template("wos_document.html",clear_form=False,results=json.dumps(session["d_form"],))
+    return render_template("wos_document.html",clear_form=True,results="No document request")
 
 @app.route("/journal", methods=["POST", "GET"])
 def wos_journal():

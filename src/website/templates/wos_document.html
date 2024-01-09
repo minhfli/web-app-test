@@ -47,6 +47,9 @@
     }
 </style>
 
+{% if clear_form == True: %}
+
+{%else%}
 {%set UID = request.form.get('UID')%}
 {%set TI = request.form.get('TI')%}
 {%set IS = request.form.get('IS')%}
@@ -64,6 +67,7 @@
 {%set OG = request.form.get('OG')%}
 {%set TS = request.form.get('TS')%}
 {%set SUR = NONE%}
+{%endif%}
 
 <div class="wrapper" style="margin: 0%;">
     <table class="layout_table">
