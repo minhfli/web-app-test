@@ -2,7 +2,7 @@ from calendar import c
 import re
 import sys
 import json
-from flask import Flask, Request,redirect, render_template,url_for,request,session
+from flask import Flask, Request,redirect, render_template,url_for
 import requests
 
 
@@ -14,23 +14,8 @@ app.config['SECRET_KEY'] = 'oh_so_secret'
 def home():
     return render_template("base.html")
 
-def save_document_request(request:Request):
-    json_data = request.form.to_dict(flat=True)
-    session["d_form"] = json_data
-    
-@app.route("/document", methods=["POST", "GET"])
-def wos_document():
-    if request.method == "POST":
-        if request.form['action'] == "Search":
-            save_document_request(request)
-        elif request.form['action'] == "Clear":
-            save_document_request(request)
-            return render_template("wos_document.html",clear_form=True,results=json.dumps(session["d_form"]))
-        
-            
-    if "json" in session:
-        return render_template("wos_document.html",clear_form=False,results=json.dumps(session["d_form"],))
-    return render_template("wos_document.html",clear_form=True,results="No document request")
+from website.document_search import document_search_bp
+app.register_blueprint(document_search_bp)
 
 @app.route("/journal", methods=["POST", "GET"])
 def wos_journal():

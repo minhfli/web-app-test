@@ -29,6 +29,7 @@
     .layout_table {
         table-layout: fixed;
         width: 100%;
+        height: 200px;
     }
 
     .layout_table td:nth-child(1) {
@@ -39,7 +40,7 @@
         width: 68%;
     }
 
-    div.scroll {
+    .scroll {
         width: 100%;
         height: 100%;
         overflow: scroll;
@@ -156,9 +157,9 @@
                 <input type="submit" name="action" value="Clear">
             </form>
         </td>
-        <td align="left"> ok
-            <div class="scroll">
-                {{results}}
+        <td align="left" style="vertical-align: top;"> ok
+            <div class="scroll" style=" padding-top: 10px;">
+                {{results|safe}}
             </div>
         </td>
     </table>
