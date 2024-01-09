@@ -46,83 +46,110 @@
         float: left;
     }
 </style>
+
+{%set UID = request.form.get('UID')%}
+{%set TI = request.form.get('TI')%}
+{%set IS = request.form.get('IS')%}
+{%set SO = request.form.get('SO')%}
+{%set VL = request.form.get('VL')%}
+{%set PG = NONE%}
+{%set CS = request.form.get('CS')%}
+{%set PY = request.form.get('PY')%}
+{%set AU = request.form.get('AU')%}
+{%set AI = request.form.get('AI')%}
+{%set UT = request.form.get('UT')%}
+{%set DO = request.form.get('DO')%}
+{%set DT = request.form.get('DT')%}
+{%set PMID = request.form.get('PMID')%}
+{%set OG = request.form.get('OG')%}
+{%set TS = request.form.get('TS')%}
+{%set SUR = NONE%}
+
 <div class="wrapper" style="margin: 0%;">
     <table class="layout_table">
         <td>
-            <form action="#" method="post">
-                <table class="search_table">
+            <form action=# method="post">
+                <table class=" search_table">
                     <tr class="spaceUnder">
                         <td align="right">UID</td>
-                        <td align="left"><input type="text" name="UID" placeholder="Unique identifier" /></td>
+                        <td align="left">
+                            <input type="text" value='{{UID}}' name="UID" placeholder="Unique identifier" />
+                        </td>
                     </tr>
                     <tr>
                         <td align=" right">Title</td>
-                        <td align="left"><input type="text" name="TI" placeholder="Title of document" /></td>
+                        <td align="left">
+                            <input type="text" value='{{TI}}' name="TI" placeholder="Title of document" />
+                        </td>
                     </tr>
                     <tr>
                         <td align="right">ISSN/ISBN</td>
-                        <td align="left"><input type="text" name="IS" /></td>
+                        <td align="left"><input type="text" value="{{IS}}" name="IS" /></td>
                     </tr>
                     <tr>
                         <td align="right">Source title</td>
-                        <td align="left"><input type="text" name="SO" /></td>
+                        <td align="left"><input type="text" value="{{SO}}" name="SO" /></td>
                     </tr>
                     <tr>
                         <td align="right">Volume</td>
-                        <td align="left"><input type="text" name="VL" /></td>
+                        <td align="left"><input type="text" value="{{VL}}" name="VL" /></td>
                     </tr>
                     <tr>
                         <td align="right">Page</td>
-                        <td align="left"><input type="text" name="PG" disabled=True /></td>
+                        <td align="left"><input type="text" value="{{PG}}" name="PG" disabled=True /></td>
                     </tr>
                     <tr>
                         <td align="right">Issue</td>
-                        <td align="left"><input type="text" name="CS" /></td>
+                        <td align="left"><input type="text" value="{{CS}}" name="CS" /></td>
                     </tr>
                     <tr>
                         <td align="right">Year Published</td>
-                        <td align="left"><input type="text" name="PY" placeholder="article's cover date" /></td>
+                        <td align="left">
+                            <input type="text" value="{{PY}}" name="PY" placeholder="article's cover date" />
+                        </td>
                     </tr>
 
                     <tr>
                         <td align="right">Author</td>
-                        <td align="left"><input type="text" name="AU" /></td>
+                        <td align="left"><input type="text" value="{{AU}}" name="AU" /></td>
                     </tr>
                     <tr>
                         <td align="right">Author Identifier</td>
-                        <td align="left"><input type="text" name="AI" /></td>
+                        <td align="left"><input type="text" value="{{AI}}" name="AI" /></td>
                     </tr>
                     <tr>
                         <td align="right">Accession Number</td>
-                        <td align="left"><input type="text" name="UT" /></td>
+                        <td align="left"><input type="text" value="{{UT}}" name="UT" /></td>
                     </tr>
                     <tr>
                         <td align="right">DOI</td>
-                        <td align="left"><input type="text" name="DO" /></td>
+                        <td align="left"><input type="text" value="{{DO}}" name="DO" /></td>
                     </tr>
                     <tr>
                         <td align="right">Document Type</td>
-                        <td align="left"><input type="text" name="DT" /></td>
+                        <td align="left"><input type="text" value="{{DT}}" name="DT" /></td>
                     </tr>
                     <tr>
                         <td align="right">PubMed ID</td>
-                        <td align="left"><input type="text" name="PMID" /></td>
+                        <td align="left"><input type="text" value="{{PMID}}" name="PMID" /></td>
                     </tr>
                     <tr>
                         <td align="right">Organization</td>
-                        <td align="left"><input type="text" name="OG" /></td>
+                        <td align="left"><input type="text" value="{{OG}}" name="OG" /></td>
                     </tr>
                     <tr>
                         <td align="right">Keywords</td>
-                        <td align="left"><input type="text" name="LA" placeholder="topic terms within the document" />
+                        <td align="left">
+                            <input type="text" value="{{TS}}" name="TS" placeholder="topic terms within the document" />
                         </td>
                     </tr>
                     <tr>
                         <td align="right">Search records in DRCI</td>
-                        <td align="left"><input type="text" name="SUR" disabled=True /></td>
+                        <td align="left"><input type="text" value="{{SUR}}" name="SUR" disabled=True /></td>
                     </tr>
                 </table>
-                <input type="submit" value="Search">
+                <input type="submit" name="action" value="Search">
+                <input type="submit" name="action" value="Clear">
             </form>
         </td>
         <td align="left"> ok
