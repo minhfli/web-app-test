@@ -1,7 +1,8 @@
 from calendar import c
 import re
+from tkinter import N
 from unittest import result
-from flask import Blueprint,render_template,Request,session,request
+from flask import Blueprint, redirect,render_template,Request,session,request, url_for
 import json
 import requests
 from .api_data import APIKEY
@@ -19,28 +20,40 @@ def wos_document():
     if request.method == "POST":
         if request.form['action'] == "Search":
             save_document_request(request)
+            session["submited"] = True
+            #initial_json = get_json_request(session["d_form"])
+            initial_json = None
+            if initial_json is None:
+                session.pop("d_results",None)
+            else:
+                session["d_results"] = initial_json
+            return redirect("/document")
         elif request.form['action'] == "Clear":
             save_document_request(request)
+            session["submited"] = False
             clear_form = True
-    if request.method == "GET":
-        clear_form = True
-    
-        
-    if "d_form" in session:
-        return render_template("wos_document.html",clear_form=clear_form,results= get_search_output(session["d_form"]))
+
+    return render_template("wos_document.html",clear_form=clear_form,
+                           results=json.dumps(session["d_form"])+ f'{session["submited"]}',session=session)
+    if "d_results" in session:
+        return render_template("wos_document.html",clear_form=clear_form,results= get_search_output(session["d_results"]))
     return render_template("wos_document.html",clear_form=clear_form,results="No document found")
 
 #-----------------Helper functions-----------------
-def get_search_output(input):
+def get_json_request(input):
     if "OG" not in input:
-        return "No document found"
+        return None
     OG=input["OG"]
     if (OG==""):
-        return "No document found"
+        return None
+
     initial_request = requests.get(f'https://api.clarivate.com/apis/wos-starter/v1/documents?'
                                f'q=OG={input["OG"]}'
                                f'&limit=50&page=1&db=WOS&sortField=PY+D', headers={'X-ApiKey': APIKEY})
     initial_json = initial_request.json()
+    return initial_json
+
+def get_search_output(initial_json):
     if "hits" not in initial_json:
         if "message" in initial_json:
             return initial_json["message"]

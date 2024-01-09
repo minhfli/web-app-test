@@ -51,22 +51,22 @@
 {% if clear_form == True: %}
 
 {%else%}
-{%set UID = request.form.get('UID')%}
-{%set TI = request.form.get('TI')%}
-{%set IS = request.form.get('IS')%}
-{%set SO = request.form.get('SO')%}
-{%set VL = request.form.get('VL')%}
+{%set UID = session["d_form"]['UID']%}
+{%set TI = session["d_form"]['TI']%}
+{%set IS = session["d_form"]['IS']%}
+{%set SO = session["d_form"]['SO']%}
+{%set VL = session["d_form"]['VL']%}
 {%set PG = NONE%}
-{%set CS = request.form.get('CS')%}
-{%set PY = request.form.get('PY')%}
-{%set AU = request.form.get('AU')%}
-{%set AI = request.form.get('AI')%}
-{%set UT = request.form.get('UT')%}
-{%set DO = request.form.get('DO')%}
-{%set DT = request.form.get('DT')%}
-{%set PMID = request.form.get('PMID')%}
-{%set OG = request.form.get('OG')%}
-{%set TS = request.form.get('TS')%}
+{%set CS = session["d_form"]['CS']%}
+{%set PY = session["d_form"]['PY']%}
+{%set AU = session["d_form"]['AU']%}
+{%set AI = session["d_form"]['AI']%}
+{%set UT = session["d_form"]['UT']%}
+{%set DO = session["d_form"]['DO']%}
+{%set DT = session["d_form"]['DT']%}
+{%set PMID = session["d_form"]['PMID']%}
+{%set OG = session["d_form"]['OG']%}
+{%set TS = session["d_form"]['TS']%}
 {%set SUR = NONE%}
 {%endif%}
 
