@@ -11,7 +11,7 @@ from .api_data import APIKEY
 document_search_bp = Blueprint('document_search', __name__, template_folder='templates')
 clarivate_json = requests.get(f'https://api.clarivate.com/apis/wos-starter/v1/documents?'
                                f'q=OG=Clarivate'
-                              f'&limit=50&page=1&db=WOS&sortField=PY+D', headers={'X-ApiKey': APIKEY}).json()
+                              f'&limit=50&page=1&db=WOK&sortField=PY+D', headers={'X-ApiKey': APIKEY}).json()
 
 def save_document_request(request:Request):
     session.pop("d_form",None)
@@ -63,8 +63,9 @@ def query_builder(input):
 
     if input['UID'] is not None and input['UID'] != '':
         return f'https://api.clarivate.com/apis/wos-starter/v1/documents/uid?'\
+        f'db=WOK&'\
         f'uid={input["UID"]}'\
-        f'&limit=50&page=1&db=WOS&sortField=RS+D'
+        f'&limit=50&page=1&sortField=RS+D'
     
     first_attribute = False
 
@@ -87,8 +88,9 @@ def query_builder(input):
     if not first_attribute:
         return None    
     return f'https://api.clarivate.com/apis/wos-starter/v1/documents?'\
+        f'db=WOK&'\
         f'q=({query})'\
-        f'&limit=50&page=1&db=WOS&sortField=RS+D' 
+        f'&limit=50&page=1&sortField=RS+D' 
 
 def get_search_output(initial_json):
     if "hits" not in initial_json:
@@ -99,7 +101,7 @@ def get_search_output(initial_json):
     font_tag = '<p style="font-family:\'Source Sans Pro\'; line-height: 0.5">'
     output = f'{font_tag}Most Recent Documents :<br><br></p>'
     
-    for i, record in enumerate(initial_json['hits'][:10]):
+    for i, record in enumerate(initial_json['hits'][:2]):
         authors = create_authors_list(record)
         title = format_title_length(record)
 
