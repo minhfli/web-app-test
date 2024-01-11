@@ -8,6 +8,8 @@ import requests
 from sqlalchemy import false
 from .api_data import APIKEY
 
+RECORDS_TO_DISPLAY = 10
+
 document_search_bp = Blueprint('document_search', __name__, template_folder='templates')
 clarivate_json = requests.get(f'https://api.clarivate.com/apis/wos-starter/v1/documents?'
                                f'q=OG=Clarivate'
@@ -98,10 +100,12 @@ def get_search_output(initial_json):
             return initial_json["message"]
         return "No document found"
     
+    count=initial_json['metadata']['total']
     font_tag = '<p style="font-family:\'Source Sans Pro\'; line-height: 0.5">'
+    output = f'{font_tag}Found: {count} <br><br></p>'
     output = f'{font_tag}Most Recent Documents :<br><br></p>'
     
-    for i, record in enumerate(initial_json['hits'][:2]):
+    for i, record in enumerate(initial_json['hits'][:RECORDS_TO_DISPLAY]):
         authors = create_authors_list(record)
         title = format_title_length(record)
 
