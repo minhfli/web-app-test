@@ -9,9 +9,7 @@ STARTER_APIKEY="0cc5cef60cb444a1ad517c1ab959b4e677cd55c1"
 SEARCH_QUERY = 'OG=Clarivate'
 RECORDS_TO_DISPLAY = 5
 
-initial_request = requests.get(f'https://api.clarivate.com/apis/wos-starter/v1/documents?'
-                               f'q=OG=Vietnam National University'
-                               f'&limit=50&page=1&db=WOS&sortField=PY+D', headers={'X-ApiKey': STARTER_APIKEY})
+initial_request = requests.get(f'https://api.clarivate.com/apis/wos-starter/v1/documents?q=(OG=University of Melbourne)&limit=50&page=1&db=WOS&sortField=RS+D', headers={'X-ApiKey': STARTER_APIKEY})
 initial_json = initial_request.json()
 
 with open(f'{sys.path[0]}/data.json', 'w') as f:
@@ -29,7 +27,6 @@ for wos_document in initial_json['hits'][:RECORDS_TO_DISPLAY]:
             wos_document['source']['sourceTitle'] = f"<a href={journal_json['hits'][0]['links'][0]['url']}>" \
                 + wos_document['source']['sourceTitle'] + '</a>'
 
-"""
 app = Flask(__name__)
 
 
@@ -69,5 +66,4 @@ def most_recent_wos_records():
     return output
 
 
-#app.run()
-"""
+app.run()

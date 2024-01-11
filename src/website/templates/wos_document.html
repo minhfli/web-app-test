@@ -29,7 +29,7 @@
     .layout_table {
         table-layout: fixed;
         width: 100%;
-        height: 200px;
+        height: 100%;
     }
 
     .layout_table td:nth-child(1) {
@@ -42,15 +42,13 @@
 
     .scroll {
         width: 100%;
-        height: 100%;
+        height: 550px;
         overflow: scroll;
         float: left;
     }
 </style>
 
-{% if clear_form == True: %}
-
-{%else%}
+{%if "d_form" in session%}
 {%set UID = session["d_form"]['UID']%}
 {%set TI = session["d_form"]['TI']%}
 {%set IS = session["d_form"]['IS']%}
